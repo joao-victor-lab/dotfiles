@@ -1,7 +1,9 @@
 [user]
-	name = joaovictor_linux
+	name = joao-victor-lab
   email = 79527341+joao-victor-lab@users.noreply.github.com
 
 [init]
   defaultBranch = main
 
+[credential]
+	helper = store
