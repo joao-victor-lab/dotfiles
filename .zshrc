@@ -10,7 +10,17 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/asdf-vm/asdf.sh 
 
+
+#alias##
+
+alias cat="bat --style=auto"
+alias ls="exa --icons"
+alias la="exa --icons -la"
+alias ../="cd ../"
+alias commit="git commit -m"
+alias add="git add"
