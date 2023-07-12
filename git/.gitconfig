@@ -1,11 +1,9 @@
 [user]
-name = joao-victor-lab
+name = joaovictor
 email = 79527341+joao-victor-lab@users.noreply.github.com
 
 [init]
 defaultBranch = main
 
-[credential]
-helper = store
 [core]
-	editor = vim
+editor = vim
