@@ -4,17 +4,20 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Created by Zap installer
+[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
+ 
+plug "$HOME/.config/zsh/exports.zsh"
+plug "$HOME/.config/zsh/sources.zsh"
+plug "$HOME/.config/zsh/aliases.zsh"
 
-export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/asdf-vm/asdf.sh 
-source $HOME/.aliases
-
-
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-syntax-highlighting"
+plug "romkatv/powerlevel10k"
+# Load and initialise completion system
+autoload -Uz compinit
+compinit
 
