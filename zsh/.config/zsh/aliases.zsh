@@ -9,12 +9,15 @@ alias la="exa -a --icons"
 alias ll="exa -la --icons"
 alias tree="exa --tree -F"
 
-alias cd="z "
 alias ../="z ../"
 
 alias ecommit="git commit"
 alias commit="git commit -m"
-alias gadd="git add"
+alias gdd="git add"
+alias gddl="git add ."
+alias giadd="git add -i"
+alias glog="git log"
+alias gstatus="git  status"
 
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
 alias mirrord="sudo reflector --latest 50 --number 30 --sort delay --save /etc/pacman.d/mirrorlist"

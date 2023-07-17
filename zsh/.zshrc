@@ -20,6 +20,10 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "romkatv/powerlevel10k"
 plug "zap-zsh/supercharge"
+
+
+export PATH="$HOME/.local/bin":$PATH 
+
 # Load and initialise completion system
 autoload -Uz compinit
 compinit
