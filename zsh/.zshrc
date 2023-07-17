@@ -9,7 +9,9 @@ fi
 
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
- 
+
+HISTFILE=~/.zsh_history
+
 plug "$HOME/.config/zsh/exports.zsh"
 plug "$HOME/.config/zsh/sources.zsh"
 plug "$HOME/.config/zsh/aliases.zsh"
