@@ -19,6 +19,7 @@ plug "$HOME/.config/zsh/aliases.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "romkatv/powerlevel10k"
+plug "zap-zsh/supercharge"
 # Load and initialise completion system
 autoload -Uz compinit
 compinit
