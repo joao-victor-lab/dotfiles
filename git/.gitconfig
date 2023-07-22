@@ -6,4 +6,4 @@ email = 79527341+joao-victor-lab@users.noreply.github.com
 defaultBranch = main
 
 [core]
-editor = vim
+editor = lvim
