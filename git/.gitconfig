@@ -1,19 +1,12 @@
 [user]
-name = joaovictor
-email = 79527341+joao-victor-lab@users.noreply.github.com
+  name = joaovictor
+  email = 79527341+joao-victor-lab@users.noreply.github.com
 
 [init]
-defaultBranch = main
+  defaultBranch = main
 
 [core]
   editor = lvim
-
-[gpd]
-	format = ssh
-  singKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID72/lVRfmdbIg4RB3ioRk7DQuDNt8ssm1CJJq+3Q9SS 9527341+joao-victor-lab@users.noreply.github.com"
-
-[commit]
-  gpdsing = true
 
 [core]
   pager = delta
