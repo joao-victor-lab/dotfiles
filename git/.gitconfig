@@ -6,4 +6,33 @@ email = 79527341+joao-victor-lab@users.noreply.github.com
 defaultBranch = main
 
 [core]
-editor = lvim
+  editor = lvim
+
+[gpd]
+	format = ssh
+	singKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGQ4Qt1KVT3ZQzsG6wzjrSg+U2TRdyZCoX01ylMFcyQm9527341+joao-victor-lab@users.noreply.github.com "
+
+[commit]
+  gpdsing = true
+
+[core]
+  pager = delta
+
+[interactive]
+   diffFilter = delta --color-only --features=interactive
+
+[delta]
+  features = decorations
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
+

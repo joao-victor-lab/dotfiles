@@ -1,24 +1,28 @@
-#!/bin/sh
+#!/bin/env zsh
 
-alias zreload="source ~/.zshrc"
+function reload(){
+  #source $HOME/.zshenv 
+  source ${ZDOTDIR:-$HOME}/.zshrc 
+}
 
-alias bcat="bat --style=auto"
+alias cat="bat --style=auto"
+alias Cat="cat"
 
 alias ls="exa --icons"
 alias la="exa -a --icons"
 alias ll="exa -la --icons"
 
-alias tree="dust"
+alias tree="dust" 
 
-alias ../="z ../ "
+alias ../="z ../"
 
-alias ecommit="git commit"
+# alias ecommit="git commit"
 alias commit="git commit -m"
-alias gdd="git add"
-alias gddl="git add ."
-alias giadd="git add -i"
+# alias gdd="git add"
+alias gall="git add ."
+alias gadd="git add -i"
 alias glog="git log"
-alias gstatus="git  status"
+alias status="git  status"
 
 alias mirror="sudo reflector -f 30 -l 30 --number 20 --verbose --save /etc/pacman.d/mirrorlist"
 alias mirrord="sudo reflector --latest 50 --number 30 --sort delay --save /etc/pacman.d/mirrorlist"
@@ -28,5 +32,12 @@ alias mirrora="sudo reflector --latest 50 --number 30 --sort age --save /etc/pac
 alias cp="cp -i"
 alias mv"mv -i"
 alias rm="rm -i"
+alias mkdir="mkdir -pv"
 
 alias fish="asciiquarium"
+
+alias hd="/usr/sbin/hexdump"
+
+alias stow="stow --verbose"
+
+
