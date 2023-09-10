@@ -25,7 +25,7 @@ plug "romkatv/powerlevel10k"
 
 
 eval "$(zoxide init zsh)"
-eval "$(ssh-agent -s)"
+eval "$(ssh-agent)"
 
 source $HOME/.config/zsh/exports.zsh 
 source $HOME/.config/zsh/sources.zsh 
