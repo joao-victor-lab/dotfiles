@@ -10,7 +10,7 @@ defaultBranch = main
 
 [gpd]
 	format = ssh
-	singKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGQ4Qt1KVT3ZQzsG6wzjrSg+U2TRdyZCoX01ylMFcyQm9527341+joao-victor-lab@users.noreply.github.com "
+  singKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID72/lVRfmdbIg4RB3ioRk7DQuDNt8ssm1CJJq+3Q9SS 9527341+joao-victor-lab@users.noreply.github.com"
 
 [commit]
   gpdsing = true
