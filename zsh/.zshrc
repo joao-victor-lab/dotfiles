@@ -26,6 +26,7 @@ plug "romkatv/powerlevel10k"
 
 eval "$(zoxide init zsh)"
 eval "$(ssh-agent)"
+ssh-add ~/.ssh/.github/id_ed25519
 
 source $HOME/.config/zsh/exports.zsh 
 source $HOME/.config/zsh/sources.zsh 
