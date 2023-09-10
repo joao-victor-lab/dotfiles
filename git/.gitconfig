@@ -29,3 +29,9 @@
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
 
+[gpd]
+	format = ssh
+  singKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID72/lVRfmdbIg4RB3ioRk7DQuDNt8ssm1CJJq+3Q9SS 9527341+joao-victor-lab@users.noreply.github.com
+
+[commit]
+	gpdsing = true
