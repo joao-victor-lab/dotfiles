@@ -1,12 +1,13 @@
 #!/bin/env zsh
 
-function reload(){
+function reload() {
+
   #source $HOME/.zshenv 
   source ${ZDOTDIR:-$HOME}/.zshrc 
+
 }
 
-alias cat="bat --style=auto"
-alias Cat="cat"
+alias bcat="bat --style=auto"
 
 alias ls="exa --icons"
 alias la="exa -a --icons"

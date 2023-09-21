@@ -10,10 +10,11 @@ fi
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-HISTFILE=~/.zsh/.zsh_history
+HISTFILE=.zsh/
 HISTSIZE=6000
 SAVEHIST=6000
 
+ eval "$(zoxide init zsh)";
 
 # plug maneger zap
 plug "zap-zsh/supercharge"
@@ -22,17 +23,12 @@ plug "zsh-users/zsh-syntax-highlighting"
 plug "romkatv/powerlevel10k"
 
 
-
-
-eval "$(zoxide init zsh)"
-eval "$(ssh-agent)"
-ssh-add ~/.ssh/.github/id_ed25519
-
 source $HOME/.config/zsh/exports.zsh 
 source $HOME/.config/zsh/sources.zsh 
 source $HOME/.config/zsh/aliases.zsh 
 
 export PATH="$HOME/.local/bin":$PATH 
+export TERM=alacritty
 
 # Load and initialise completion system
 autoload -Uz compinit
@@ -40,3 +36,34 @@ compinit
 
 
 fpath=(/home/joaozeus/.zsh/gradle-completion $fpath)
+
+# pnpm
+export PNPM_HOME="/home/joaozeus/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+#ssh github 
+
+env=~/.ssh/agent.env
+ssh_file=~/.ssh/.github/id_ed25519
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add "$ssh_file"
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add "$ssh_file"
+fi
+
+unset env
