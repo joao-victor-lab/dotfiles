@@ -48,7 +48,8 @@ esac
 #ssh github 
 
 env=/home/joaozeus/.ssh/agent.env
-_KEY="/home/joaozeus/.ssh/.github/id_ed25519"
+SSH_KEY="/home/joaozeus/.ssh/.github/github"
+
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
 agent_start () {
@@ -61,9 +62,9 @@ agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
 if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
     agent_start
-    ssh-add "$_KEY"   
+    ssh-add "$SSH_KEY"   
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add "$_KEY" 
+    ssh-add "$SSH_KEY" 
 fi
 
 unset env

@@ -1,6 +1,7 @@
 [user]
   name = joao-victor-lab
   email = 79527341+joao-victor-lab@users.noreply.github.com
+	signingkey = /home/joaozeus/.ssh/.github/github.pubj
 
 [init]
   defaultBranch = main
@@ -29,9 +30,5 @@
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
 
-
-[gpd]
+[gpg]
 	format = ssh
-	singKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaNzktqq77MUIdNnkqINYAxzPOtripkqeS9acXFTMDW joaosan17017vic@gmail.com
-[commit]
-	gpdsing = true
