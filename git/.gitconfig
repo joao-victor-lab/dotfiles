@@ -1,12 +1,12 @@
 [user]
-  name = joaovictor
+  name = joao-victor-lab
   email = 79527341+joao-victor-lab@users.noreply.github.com
 
 [init]
   defaultBranch = main
 
 [core]
-  editor = vim
+  editor = vi
 
 [core]
   pager = delta
@@ -30,10 +30,8 @@
   hunk-header-style = file line-number syntax
 
 
-
 [gpd]
-  format = ssh
-  singKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaNzktqq77MUIdNnkqINYAxzPOtripkqeS9acXFTMDW joaosan17017vic@gmail.com
-
+	format = ssh
+	singKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaNzktqq77MUIdNnkqINYAxzPOtripkqeS9acXFTMDW joaosan17017vic@gmail.com
 [commit]
-  gpdsing = true
+	gpdsing = true

@@ -10,11 +10,11 @@ fi
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-HISTFILE=.zsh/
+HISTFILE="/home/joaozeus/zsh/"
 HISTSIZE=6000
 SAVEHIST=6000
 
- eval "$(zoxide init zsh)";
+eval "$(zoxide init zsh)";
 
 # plug maneger zap
 plug "zap-zsh/supercharge"
@@ -47,8 +47,8 @@ esac
 
 #ssh github 
 
-env=~/.ssh/agent.env
-ssh_file=~/.ssh/.github/id_ed25519
+env=/home/joaozeus/.ssh/agent.env
+_KEY="/home/joaozeus/.ssh/.github/id_ed25519"
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
 agent_start () {
@@ -61,9 +61,12 @@ agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
 if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
     agent_start
-    ssh-add "$ssh_file"
+    ssh-add "$_KEY"   
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add "$ssh_file"
+    ssh-add "$_KEY" 
 fi
 
 unset env
+
+
+
