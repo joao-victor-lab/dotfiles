@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env zsh
 
 source /opt/asdf-vm/asdf.sh
 
