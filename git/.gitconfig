@@ -1,12 +1,13 @@
 [user]
   name = joao-victor-lab
-  email = 79527341+joao-victor-lab@users.noreply.github.com
+	email = 79527341+joao-victor-lab@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdK/xH6JTQdMFrU3TgDCVzuZgWUBpLZrqGt/fMEUYw/ 79527341+joao-victor-lab@users.noreply.github.com
 
 [init]
   defaultBranch = main
 
 [core]
-  editor = vim
+  editor = nvim
 
 [core]
   pager = delta
@@ -31,10 +32,12 @@
 
 [gpg]
 	format = ssh
-	signingkey = /home/joaozeus/.ssh/.github/github.pub
 
 [commit]
 	gpdsing = true
 
 [push]
 	autoSetupRemote = true
+
+[tag]
+	gpdsing = true
