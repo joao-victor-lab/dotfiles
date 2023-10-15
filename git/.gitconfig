@@ -39,3 +39,5 @@
 
 [alias]
 	c = commit -s
+[gpg]
+	format = ssh
