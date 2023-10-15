@@ -1,16 +1,23 @@
 [user]
   name = joao-victor-lab
 	email = 79527341+joao-victor-lab@users.noreply.github.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdK/xH6JTQdMFrU3TgDCVzuZgWUBpLZrqGt/fMEUYw/ 79527341+joao-victor-lab@users.noreply.github.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdK/xH6JTQdMFrU3TgDCVzuZgWUBpLZrqGt/fMEUYw/ 79527341+joao-victor-lab@users.noreply.github.com
+
+[tag]
+	gpdsing = true
+
+[commit]
+	gpdsing = true
+
+[push]
+	autoSetupRemote = true
 
 [init]
   defaultBranch = main
 
 [core]
   editor = nvim
-
-[core]
-  pager = delta
+  pager = delta 
 
 [interactive]
    diffFilter = delta --color-only --features=interactive
@@ -30,14 +37,5 @@
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
 
-[gpg]
-	format = ssh
-
-[commit]
-	gpdsing = true
-
-[push]
-	autoSetupRemote = true
-
-[tag]
-	gpdsing = true
+[alias]
+	c = commit -s
