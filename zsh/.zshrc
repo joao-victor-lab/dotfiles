@@ -10,11 +10,10 @@ fi
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-HISTFILE="/home/joaozeus/zsh/"
+HISTFILE="$HOME/.zsh/history/"
 HISTSIZE=6000
 SAVEHIST=6000
 
-eval "$(zoxide init zsh)";
 
 # plug maneger zap
 plug "zap-zsh/supercharge"
@@ -23,15 +22,13 @@ plug "zsh-users/zsh-syntax-highlighting"
 plug "romkatv/powerlevel10k"
 
 
-source $HOME/.config/zsh/exports.zsh 
-source $HOME/.config/zsh/sources.zsh 
-source $HOME/.config/zsh/aliases.zsh 
+source $HOME/.zsh/sources/exports.zsh 
+source $HOME/.zsh/sources/sources.zsh 
+source $HOME/.zsh/sources/aliases.zsh 
+source $HOME/.zsh/sources/my_functions.zsh
 
 export PATH="$HOME/.local/bin":$PATH 
 
-export SPRING_HOME="$HOME/.local/bin/spring-3.1.4"
-export PATH="$SPRING_HOME/bin:$PATH"
-export JAVA_HOME="/home/joaozeus/.asdf/shims/java"
 
 # Load and  initialise completion system
 autoload -Uz compinit
@@ -47,32 +44,4 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-#ssh github 
-
-env=/home/joaozeus/.ssh/agent.env
-SSH_KEY=~/.ssh/.github/git 
-SSH_KEY_SING=~/.ssh/.github/sing/git_sing 
-
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-agent_start () {
-    (umask 077; ssh-agent >|"$env")
-    . "$env" >| /dev/null ;}
-
-agent_load_env
-
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-
-    ssh-add $SSH_KEY  
-    ssh-add $SSH_KEY_SING
-
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-
-    ssh-add $SSH_KEY
-    ssh-add $SSH_KEY_SING
-
-fi
-unset env
+eval "$(zoxide init zsh)";
