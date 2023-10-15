@@ -1,13 +1,14 @@
 [user]
   name = joao-victor-lab
-	email = 79527341+joao-victor-lab@users.noreply.github.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdK/xH6JTQdMFrU3TgDCVzuZgWUBpLZrqGt/fMEUYw/ 79527341+joao-victor-lab@users.noreply.github.com
+  email = 79527341+joao-victor-lab@users.noreply.github.com 
+	signingkey = DD5709CDC5F21CF1AC6C061E754CC380D88FA4CE
 
 [tag]
 	gpdsing = true
 
 [commit]
 	gpdsing = true
+	gpgsign = true
 
 [push]
 	autoSetupRemote = true
@@ -39,3 +40,9 @@
 
 [alias]
 	c = commit -s
+	s = status
+	l = log
+	all = add .
+
+[gpg]
+	program = gpg2
