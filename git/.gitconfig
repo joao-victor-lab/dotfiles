@@ -1,7 +1,7 @@
 [user]
   name = joao-victor-lab
-	email = 79527341+joao-victor-lab@users.noreply.github.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdK/xH6JTQdMFrU3TgDCVzuZgWUBpLZrqGt/fMEUYw/ 79527341+joao-victor-lab@users.noreply.github.com
+  email = joaosan17017vic@gmail.com 
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMPbBo41GjG+R/1CL1OupYaVvlPi+k/aLLCcmmXxt9JK joaosan17017vic@gmail.com
 
 [tag]
 	gpdsing = true
@@ -39,5 +39,8 @@
 
 [alias]
 	c = commit -s
+	s = status
+	l = log
+	all = add .
 [gpg]
 	format = ssh
