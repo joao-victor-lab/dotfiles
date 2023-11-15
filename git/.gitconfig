@@ -3,6 +3,7 @@
   email = 79527341+joao-victor-lab@users.noreply.github.com 
 	signingkey = DD5709CDC5F21CF1AC6C061E754CC380D88FA4CE
 
+
 [tag]
 	gpdsing = true
 
@@ -43,6 +44,7 @@
 	s = status
 	l = log
 	all = add .
+
 
 [gpg]
 	program = gpg2
