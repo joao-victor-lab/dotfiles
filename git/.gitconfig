@@ -45,3 +45,5 @@
 	all = add .
 
 
+[gpg]
+	format = ssh
