@@ -14,7 +14,7 @@ github_setup ()
 
 env=/home/joaozeus/.ssh/agent.env
 SSH_KEY=/home/joaozeus/.ssh/.github/git 
-#KEY_SING=/home/joaozeus/.ssh/.github/sing/key_sing 
+SING=/home/joaozeus/.ssh/.github/sing/id_ed25519 
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
@@ -29,13 +29,13 @@ agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
     agent_start
 
-    ssh-add $SSH_KEY  
-    ssh-add /home/joaozeus/.ssh/.github/sing/key_sing 
+    ssh-add $SSH_KEY
+    ssh-add $SING 
 
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
 
     ssh-add $SSH_KEY
-    ssh-add /home/joaozeus/.ssh/.github/sing/key_sing 
+    ssh-add $SING 
 
 fi
 

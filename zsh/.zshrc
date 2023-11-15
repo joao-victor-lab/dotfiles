@@ -25,7 +25,7 @@ plug "romkatv/powerlevel10k"
 source $HOME/.zsh/sources/exports.zsh 
 source $HOME/.zsh/sources/sources.zsh 
 source $HOME/.zsh/sources/aliases.zsh 
-fpath=(/home/joaozeus/.zsh/sources/my_functions.zsh $fpath)
+source $HOME/.zsh/sources/my_functions.zsh
 
 export PATH="$HOME/.local/bin":$PATH 
 
