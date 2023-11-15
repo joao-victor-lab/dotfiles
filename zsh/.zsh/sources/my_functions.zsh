@@ -9,12 +9,12 @@ zsh_benchmark ()
 
 }
 
-setup_github ()
+github_setup ()
 {
 
 env=/home/joaozeus/.ssh/agent.env
 SSH_KEY=~/.ssh/.github/git 
-SSH_KEY_SING=~/.ssh/.github/sing/git_sing 
+SSH_KEY_SING=~/.ssh/.github/sing/github_singin 
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
