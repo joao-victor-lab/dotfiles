@@ -8,8 +8,8 @@ lvim.builtin.alpha.dashboard.section.header.val = {
 
 -- lvim.colorscheme = "onedark"
 -- lvim.colorscheme = "darkplus"
-lvim.colorscheme = "primer_dark"
-lvim.log.level = "warn"
+-- lvim.colorscheme = "primer_dark"
+-- lvim.log.level = "warn"
 lvim.builtin.alpha.active = true
 lvim.reload_config_on_save = false
 lvim.builtin.illuminate.active = false
@@ -64,7 +64,7 @@ local options = {
   relativenumber = true, -- set relative numbered lines
   numberwidth = 4, -- set number column width to 2 {default 4}
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-  wrap = false, -- display lines as one long line
+  wrap = true, -- display lines as one long line
   scrolloff = 0,
   sidescrolloff = 8,
   guifont = "monospace:h17", -- the font used in graphical neovim applications
@@ -85,13 +85,13 @@ vim.opt.fillchars:append {
 
 vim.opt.shortmess:append "c"
 
-for k, v in pairs(options) do
-  vim.opt[k] = v
+for n_opts, set_opts in pairs(options) do
+  vim.opt[n_opts] = set_opts
 end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+-- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
 vim.filetype.add {
   extension = {

@@ -127,4 +127,15 @@ lvim.plugins = {
   -- "rmagatti/session-lens"
   -- "christianchiarulli/nvim-ts-rainbow",
   -- "karb94/neoscroll.nvim",
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000
+  },
 }

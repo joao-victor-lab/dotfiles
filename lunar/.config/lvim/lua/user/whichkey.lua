@@ -9,12 +9,14 @@ lvim.builtin.which_key.mappings["q"] = { '<cmd>lua require("user.functions").sma
 lvim.builtin.which_key.mappings["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" }
 -- lvim.builtin.which_key.mappings["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" }
 lvim.builtin.which_key.mappings["gy"] = "Link"
+
 lvim.builtin.which_key.mappings["r"] = {
   name = "Replace",
   r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
   w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
   f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
 }
+
 lvim.builtin.which_key.mappings["a"] = {
   name = "A.I.",
   c = { "<cmd>ChatGPT<cr>", "ChatGPT" },
@@ -25,6 +27,7 @@ lvim.builtin.which_key.mappings["a"] = {
   p = { "<cmd>Copilot panel<cr>", "Toggle Copilot Panel" },
   t = { "<cmd>Copilot toggle<cr>", "Toggle Copilot" },
 }
+
 lvim.builtin.which_key.mappings["d"] = {
   name = "Debug",
   b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
@@ -37,6 +40,7 @@ lvim.builtin.which_key.mappings["d"] = {
   u = { "<cmd>lua require'dapui'.toggle()<cr>", "UI" },
   x = { "<cmd>lua require'dap'.terminate()<cr>", "Exit" },
 }
+
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
   b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -54,6 +58,7 @@ lvim.builtin.which_key.mappings["f"] = {
   k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
   C = { "<cmd>Telescope commands<cr>", "Commands" },
 }
+
 lvim.builtin.which_key.mappings["g"] = {
   name = "Git",
   -- g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle(12000)<cr>", "Lazygit" },
@@ -78,6 +83,7 @@ lvim.builtin.which_key.mappings["g"] = {
     "<cmd>Gitsigns diffthis HEAD<cr>",
     "Diff",
   },
+
   G = {
     name = "Gist",
     a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
@@ -88,6 +94,7 @@ lvim.builtin.which_key.mappings["g"] = {
     p = { "<cmd>Gist -b -p<cr>", "Create Private" },
   },
 }
+
 lvim.builtin.which_key.mappings["l"] = {
   name = "LSP",
   a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -126,6 +133,7 @@ lvim.builtin.which_key.mappings["l"] = {
   t = { '<cmd>lua require("user.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
   u = { "<cmd>LuaSnipUnlinkCurrent<cr>", "Unlink Snippet" },
 }
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "Tab",
   t = {
@@ -161,9 +169,9 @@ lvim.builtin.which_key.mappings["n"] = {
 
 lvim.builtin.which_key.mappings[";"] = nil
 -- lvim.builtin.which_key.mappings["c"] = nil
-lvim.builtin.which_key.mappings["L"] = nil
+-- lvim.builtin.which_key.mappings["L"] = nil
 lvim.builtin.which_key.mappings["s"] = nil
-lvim.builtin.which_key.mappings["w"] = nil
+-- lvim.builtin.which_key.mappings["w"] = nil
 
 local m_opts = {
   mode = "n", -- NORMAL mode
@@ -186,7 +194,7 @@ local m_mappings = {
   c = { "<cmd>BookmarkClear<cr>", "Clear" },
   l = { "<cmd>BookmarkList<cr>", "List" },
   f = { "<cmd>FilemarkToggle<cr>", "Mark File" },
-  h = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
+  -- h = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
   -- ["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', "Harpoon Next" },
   -- [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Harpoon Prev" },
   -- l = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },
