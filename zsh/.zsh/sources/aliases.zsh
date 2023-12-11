@@ -19,7 +19,7 @@ alias ../="z ../"
 
 # alias ecommit="git commit"
 alias commit="git commit -m"
-# alias gdd="git add"
+alias gstatus="git s"
 alias gall="git add ."
 alias gadd="git add -i"
 alias glog="git log"

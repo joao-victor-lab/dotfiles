@@ -10,7 +10,7 @@ fi
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-HISTFILE="$HOME/.zsh/history/"
+HISTFILE="/home/joaozeus/.zsh/history/"
 HISTSIZE=6000
 SAVEHIST=6000
 
