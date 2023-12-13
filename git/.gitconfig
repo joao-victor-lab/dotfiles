@@ -1,14 +1,14 @@
 [user]
   name = joao-victor-lab
   email = 79527341+joao-victor-lab@users.noreply.github.com 
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBuUINI0HJnKPAa1i+imy3JZBFPwTksHDluWN9pyePg7 joaosan17017vic@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMu3WTryUdxRj0m8VUo+B61ODOtypY1TLcBKtdwn1RSw joaosan17017vic@gmail.com 
 
 
 [tag]
 	gpdsing = true
 
 [commit]
-	gpdsing = true
+	gpgSign = true
 
 [push]
 	autoSetupRemote = true
@@ -17,7 +17,7 @@
   defaultBranch = main
 
 [core]
-  editor = lvim
+  editor = nvim
   pager = delta 
 
 [interactive]
@@ -25,6 +25,7 @@
 
 [delta]
   features = decorations
+	side-by-side = true
 
 [delta "interactive"]
   keep-plus-minus-markers = false
