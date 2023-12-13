@@ -1,14 +1,9 @@
-lvim.builtin.alpha.dashboard.section.header.val = {
-  "    __                          _    ___         ",
-  "   / /   __  ______  ____ _____| |  / (_)___ ___ ",
-  "  / /   / / / / __ \\/ __ `/ ___/ | / / / __ `__ \\",
-  " / /___/ /_/ / / / / /_/ / /   | |/ / / / / / / /",
-  "/_____/\\__,_/_/ /_/\\__,_/_/    |___/_/_/ /_/ /_/ ",
-}
-
+-- local banner = require("user.dashboard")
+-- lvim.builtin.alpha.dashboard.section.header.val  
 -- lvim.colorscheme = "onedark"
 -- lvim.colorscheme = "darkplus"
--- lvim.colorscheme = "primer_dark"
+lvim.colorscheme = "catppuccin-macchiato"
+lvim.transparent_window = true
 -- lvim.log.level = "warn"
 lvim.builtin.alpha.active = true
 lvim.reload_config_on_save = false
@@ -16,7 +11,7 @@ lvim.builtin.illuminate.active = false
 lvim.builtin.bufferline.active = false
 lvim.builtin.terminal.persist_mode = false
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+-- lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.breadcrumbs.active = true
 lvim.builtin.dap.active = true
 lvim.keys.term_mode = { ["<C-l>"] = false }
@@ -78,12 +73,12 @@ local options = {
 -- vim.opt.fillchars.eob = " "
 -- vim.opt.fillchars = vim.opt.fillchars + "vertleft: "
 -- vim.opt.fillchars = vim.opt.fillchars + "vertright: "
-vim.opt.fillchars = vim.opt.fillchars + "eob: "
-vim.opt.fillchars:append {
-  stl = " ",
-}
+-- vim.opt.fillchars = vim.opt.fillchars + "eob: "
+-- vim.opt.fillchars:append {
+--   stl = " ",
+-- }
 
-vim.opt.shortmess:append "c"
+-- vim.opt.shortmess:append "c"
 
 for n_opts, set_opts in pairs(options) do
   vim.opt[n_opts] = set_opts

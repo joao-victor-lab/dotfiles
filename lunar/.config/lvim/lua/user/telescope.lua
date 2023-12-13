@@ -189,3 +189,5 @@ require("telescope-tabs").setup {
   theme = "dropdown",
   -- Your custom config :^)
 }
+
+require('telescope').load_extension('media_files')

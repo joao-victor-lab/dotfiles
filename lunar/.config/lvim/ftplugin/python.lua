@@ -68,7 +68,7 @@ require("neotest").setup {
 }
 
 local mappings = {
-  C = {
+  P = {
     name = "Python",
     c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
   },
