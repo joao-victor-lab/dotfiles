@@ -1,5 +1,12 @@
 #!/bin/env zsh
 
+function reload() {
+
+  # source $HOME/.zshenv 
+  source ${ZDOTDIR:-$HOME}/.zshrc 
+
+}
+
 zsh_benchmark () 
 {
  
@@ -13,8 +20,8 @@ github_setup ()
 {
 
 env=/home/joaozeus/.ssh/agent.env
-SSH_KEY=/home/joaozeus/.ssh/.github/git 
-SING=/home/joaozeus/.ssh/.github/sing/id_ed25519 
+SSH_KEY=/home/joaozeus/.ssh/github/login/git 
+SING=/home/joaozeus/.ssh/github/sing/git_commiter
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
@@ -41,4 +48,30 @@ fi
 
 unset env
 
+}
+
+py_turn_on_venv()
+{
+  source ~/.local/pipx/venvs/bin/activate
+}
+
+asdf_update_java_home() {
+  # shellcheck disable=SC2046
+  JAVA_HOME=$(realpath $(dirname $(readlink -f $(asdf which java)))/../)
+  export JAVA_HOME
+}
+autoload -U add-zsh-hook
+add-zsh-hook precmd asdf_update_java_home
+
+##lazygit 
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
 }

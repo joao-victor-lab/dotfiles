@@ -10,10 +10,10 @@ fi
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-HISTFILE="/home/joaozeus/.zsh/history/"
+# HISTFILE=.zsh_history
 HISTSIZE=6000
 SAVEHIST=6000
-
+VIM=nvim
 
 # plug maneger zap
 plug "zap-zsh/supercharge"
@@ -23,9 +23,9 @@ plug "romkatv/powerlevel10k"
 
 
 source $HOME/.zsh/sources/exports.zsh 
-source $HOME/.zsh/sources/sources.zsh 
 source $HOME/.zsh/sources/aliases.zsh 
-source $HOME/.zsh/sources/my_functions.zsh
+source $HOME/.zsh/sources/functions/_functions.zsh
+source /opt/asdf-vm/asdf.sh
 
 export PATH="$HOME/.local/bin":$PATH 
 
@@ -34,7 +34,8 @@ export PATH="$HOME/.local/bin":$PATH
 autoload -Uz compinit
 compinit
 
-fpath=(/home/joaozeus/.zsh/gradle-completion $fpath)
+fpath=("/home/joaozeus/.zsh/gradle-completion" $fpath)
+
 
 # pnpm
 export PNPM_HOME="/home/joaozeus/.local/share/pnpm"
@@ -45,3 +46,16 @@ esac
 # pnpm end
 
 eval "$(zoxide init zsh)";
+
+##lazygit 
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
