@@ -10,10 +10,10 @@ fi
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-# HISTFILE=.zsh_history
+HISTFILE=.zsh_history
 HISTSIZE=6000
 SAVEHIST=6000
-VIM=nvim
+vim=nvim
 
 # plug maneger zap
 plug "zap-zsh/supercharge"
@@ -24,7 +24,7 @@ plug "romkatv/powerlevel10k"
 
 source $HOME/.zsh/sources/exports.zsh 
 source $HOME/.zsh/sources/aliases.zsh 
-source $HOME/.zsh/sources/functions/_functions.zsh
+source "$HOME/.zsh/sources/functions/_functions.zsh"
 source /opt/asdf-vm/asdf.sh
 
 export PATH="$HOME/.local/bin":$PATH 
@@ -35,7 +35,6 @@ autoload -Uz compinit
 compinit
 
 fpath=("/home/joaozeus/.zsh/gradle-completion" $fpath)
-
 
 # pnpm
 export PNPM_HOME="/home/joaozeus/.local/share/pnpm"
