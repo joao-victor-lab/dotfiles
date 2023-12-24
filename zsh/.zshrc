@@ -46,15 +46,18 @@ esac
 
 eval "$(zoxide init zsh)";
 
-##lazygit 
-lg()
-{
-    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+# eval "`pip completion --bash`"
 
-    lazygit "$@"
 
-    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-    fi
-}
+# ##lazygit 
+# lg()
+# {
+#     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+#
+#     lazygit "$@"
+#
+#     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+#             cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+#             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+#     fi
+# }
