@@ -11,6 +11,7 @@ export PATH="$PATH:$GOBIN"
 # export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 # export PATH="$PATH:$JAVA_HOME/bin"
 
-export SPRING_HOME="$HOME/.local/bin/spring-3.1.4"
-export PATH="$SPRING_HOME/bin:$PATH"
+# export SPRING_HOME="$HOME/.local/bin/"
+# export PATH="$SPRING_HOME/bin:$PATH"
 
+# export PATH="$HOME/ENV_DIR/bin:$PATH"
