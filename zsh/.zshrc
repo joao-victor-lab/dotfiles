@@ -18,7 +18,7 @@ source ~/.zsh/fzf-alias/fzf-alias.plugin.zsh
 source ~/.zsh/sources/aliases.zsh 
 source ~/.zsh/sources/funcs.zsh
 
-#source /opt/asdf-vm/asdf.sh
+source /opt/asdf-vm/asdf.sh
 
 
 
