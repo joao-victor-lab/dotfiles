@@ -16,12 +16,11 @@ zsh_benchmark ()
 
 }
 
-github_setup ()
+set_github ()
 {
 
 env=/home/joaozeus/.ssh/agent.env
-SSH_KEY=/home/joaozeus/.ssh/github/login/git 
-SING=/home/joaozeus/.ssh/github/sing/git_commiter
+SSH_KEY=/home/joao_linus/.ssh/github/github
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
@@ -37,12 +36,10 @@ if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
     agent_start
 
     ssh-add $SSH_KEY
-    ssh-add $SING 
 
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
 
     ssh-add $SSH_KEY
-    ssh-add $SING 
 
 fi
 
@@ -50,20 +47,17 @@ unset env
 
 }
 
-py_turn_on_venv()
-{
-  source ~/.local/pipx/venvs/bin/activate
-}
-
-asdf_update_java_home() {
+#asdf_update_java_home() {
   # shellcheck disable=SC2046
-  JAVA_HOME=$(realpath $(dirname $(readlink -f $(asdf which java)))/../)
-  export JAVA_HOME
-}
-autoload -U add-zsh-hook
-add-zsh-hook precmd asdf_update_java_home
+#  JAVA_HOME=$(realpath $(dirname $(readlink -f $(asdf which java)))/../)
+#  export JAVA_HOME
+#}
+#
+#autoload -U add-zsh-hook
+#add-zsh-hook precmd asdf_update_java_home
 
 ##lazygit 
+
 lg()
 {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
