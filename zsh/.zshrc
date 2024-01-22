@@ -17,10 +17,11 @@ source ~/.zsh/fzf-alias/fzf-alias.plugin.zsh
 
 source ~/.zsh/sources/aliases.zsh 
 source ~/.zsh/sources/funcs.zsh
+source ~/.venv/bin/activate
 
 source /opt/asdf-vm/asdf.sh
 
-
+say_cow
 
 # Load and  initialise completion system
 autoload -Uz compinit
@@ -29,18 +30,6 @@ compinit
 eval "$(zoxide init zsh)";
 eval "$(ssh-agent -s)";
 
-# ##lazygit 
-# lg()
-# {
-#     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-#
-#     lazygit "$@"
-#
-#     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-#             cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-#             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-#     fi
-# }
 
 # set JAVA_HOME on every change directory
 function asdf_update_java_home {
@@ -61,3 +50,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
