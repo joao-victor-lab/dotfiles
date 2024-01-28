@@ -69,8 +69,3 @@ lg()
             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
-
-say_cow() 
-{
-  python ~/.zsh/sources/startup.py
-}

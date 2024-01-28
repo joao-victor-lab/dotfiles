@@ -21,7 +21,7 @@ source ~/.venv/bin/activate
 
 source /opt/asdf-vm/asdf.sh
 
-say_cow
+python ~/.zsh/sources/startup.py
 
 # Load and  initialise completion system
 autoload -Uz compinit
