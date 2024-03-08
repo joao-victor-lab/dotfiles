@@ -1,8 +1,7 @@
 [user]
   name = joao-victor-lab
   email = 79527341+joao-victor-lab@users.noreply.github.com 
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJiWACXFfwdvpKnLnKUNZ9kzR3eYkNPCdZ2+xMP2YRfG joaosan17017vic@gmail.com 
-
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKgv2RnF81fqFTdwWNSe/nERlIr4GEzbcOTc6e2ckbr joaosan17017vic@gmail.com
 
 [tag]
 	gpdsing = true
