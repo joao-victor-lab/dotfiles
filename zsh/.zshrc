@@ -40,11 +40,7 @@ function command_not_found_handler {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(zoxide init zsh)"
-eval "$(ssh-agent -s)"
-
-if ( "$SSH_AGENT_PID" != "" ) then
-    eval `/usr/bin/ssh-agent -k`
-fi
 
 #Display Pokemon
 pokemon-colorscripts --no-title -r 1,3,6
+
