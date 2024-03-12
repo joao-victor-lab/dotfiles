@@ -1,5 +1,10 @@
+-- luacheck: globals vim
 local linters = {
   lua = { "luacheck" },
+  bash = { "shellcheck" },
+  zsh = { "zsh" },
+
+  java = { "checkstyle" },
 }
 
 require("lint").linters_by_ft = linters

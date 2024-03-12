@@ -5,6 +5,7 @@ local plugins = {
 
   -- Override plugin definition options
   { "NvChad/nvcommunity" },
+  { import = "nvcommunity.completion.codeium" },
   { import = "nvcommunity.editor.beacon" },
   { import = "nvcommunity.editor.telescope-undo" },
   { import = "nvcommunity.editor.rainbowdelimiters" },

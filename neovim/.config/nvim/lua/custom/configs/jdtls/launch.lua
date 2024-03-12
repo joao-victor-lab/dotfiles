@@ -176,9 +176,9 @@ function M.setup()
       codeGeneration = {
         toString = {
           template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-          -- flags = {
-          -- 	allow_incremental_sync = true,
-          -- },
+          flags = {
+            allow_incremental_sync = true,
+          },
         },
         useBlocks = true,
       },
@@ -190,7 +190,7 @@ function M.setup()
           },
           {
             name = "JavaSE-21",
-            path = vim.fn.expand "~/.asdf/installs/java/openjdk-21.0.2/",
+            path = vim.fn.expand "~/.asdf/installs/java/openjdk-21.0.2",
           },
         },
       },
