@@ -1,0 +1,17 @@
+[user]
+	name = joao-victor-lab
+	email = 79527341+joao-victor-lab@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6wu01GxeF174E1T4M94rQ9Lv3EOpq655Nqz2wm+lBn joaosan17017vic@gmail.com
+[core]
+  excludesfile = /home/joaozeus/.gitignore_global
+[credential]
+	credentialStore = cache
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
