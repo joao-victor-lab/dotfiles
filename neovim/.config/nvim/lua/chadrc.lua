@@ -7,7 +7,7 @@ local M = {}
 local bn = require("banners")["random"]
 
 M.ui = {
-  theme = "chadracula-evondev",
+  theme = "tokyodark",
   theme_toggle = { "chadracula-evondev", "catppuccin" },
   transparency = true,
   lsp_semantic_tokens = true,
