@@ -133,9 +133,10 @@ function in {
     fi
 }
 
-if [[ -z "${SSH_CONNECTION}" ]]; then
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-fi
-
 #Display Pokemon
 pokemon-colorscripts --no-title -r 1,3,6
+
+if [[ -z "${SSH_CONNECTION}" ]]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    ssh-add ~/.ssh/github_key 
+fi
