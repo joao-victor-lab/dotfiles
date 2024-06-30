@@ -1,18 +1,3 @@
-# Path to powerlevel10k theme
-P10KDIR=/usr/share/zsh-theme-powerlevel10k
-if [[ ! -d P10KDIR ]]; then
-  source "$P10KDIR/powerlevel10k.zsh-theme"
-fi
-
-PATH+="${PATH}:$HOME/.local/bin"
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 ## plugin maneger
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -22,15 +7,25 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-USERDIR="$HOME/.zsh/user_scripts"
-source "$USERDIR/aliases.zsh"
-source "$USERDIR/funcs.zsh"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
+USERDIR="$HOME/.zsh"
+source ~/.zprofile
+source "$USERDIR/user_scripts/aliases.zsh"
+source "$USERDIR/user_scripts/funcs.zsh"
 
 # Add in Powerlevel10k
-# zinit ice depth=1 zinit light romkatv/powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
+# zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
@@ -52,37 +47,15 @@ zinit cdreplay -q
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
-
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 # eval "$(eww shell-completions --shell zsh)"
 
-. /opt/asdf-vm/asdf.sh
-
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
+
+. /opt/asdf-vm/asdf.sh
 
 # In case a command is not found, try to find the package that has it
 function command_not_found_handler {
@@ -133,10 +106,9 @@ function in {
     fi
 }
 
-#Display Pokemon
-pokemon-colorscripts --no-title -r 1,3,6
-
 if [[ -z "${SSH_CONNECTION}" ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-    ssh-add ~/.ssh/github_key 
 fi
+
+#Display Pokemon
+pokemon-colorscripts --no-title -r 1,3,6
