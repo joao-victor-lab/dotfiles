@@ -12,7 +12,9 @@ zsh_benchmark ()
  
   for ((i = 0; i < 5; i++)); do
     time zsh --interactive -c exit
-  done }
+  done
+
+}
 
 # set_github ()
 # {
@@ -45,7 +47,7 @@ zsh_benchmark ()
 #
 # }
 
-#asdf_update_java_home() {
+#adf_update_java_home() {
   # shellcheck disable=SC2046
 #  JAVA_HOME=$(realpath $(dirname $(readlink -f $(asdf which java)))/../)
 #  export JAVA_HOME
@@ -67,3 +69,4 @@ lg()
             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
+
