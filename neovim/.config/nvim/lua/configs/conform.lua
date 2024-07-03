@@ -1,12 +1,19 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
+
     javascript = { { "biome", "prettier" } },
+
     -- css = { "prettier" },
+
     -- html = { "prettier" },
-    zsh = { "shfmt" },
-    bash = { "shfmt" },
-    sh = { "shfmt" },
+
+    bash = { "beautysh", "shfmt" },
+
+    sh = { "beautysh", "shfmt" },
+
+    zsh = { "beautysh" },
+
     java = { "google-java-format" },
   },
 

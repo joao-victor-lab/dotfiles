@@ -14,3 +14,6 @@ map({ "n", "v" }, "<A-j>", ":m .+1<CR>==")
 map({ "n", "v" }, "<A-k>", ":m .-2<CR>==")
 
 Gmap("n", "<leader>cs", ":ASToggle<CR>", {})
+
+map("n", "zR", require("ufo").openAllFolds, {})
+map("n", "zM", require("ufo").closeAllFolds, {})

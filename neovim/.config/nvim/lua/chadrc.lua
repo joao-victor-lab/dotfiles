@@ -7,7 +7,7 @@ local M = {}
 local bn = require("banners")["random"]
 
 M.ui = {
-  theme = "tokyodark",
+  theme = "catppuccin",
   theme_toggle = { "chadracula-evondev", "catppuccin" },
   transparency = true,
   lsp_semantic_tokens = true,
@@ -52,6 +52,7 @@ M.base46 = {
     "notify",
     "lsp",
     "semantic_tokens",
+    "devicons",
   },
 }
 

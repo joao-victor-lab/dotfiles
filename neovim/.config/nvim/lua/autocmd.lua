@@ -24,3 +24,21 @@ autocmd("BufReadPost", {
     end
   end,
 })
+
+vim.api.nvim_create_user_command("ToggleDiagnostic", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { nargs = 0 })
+
+-- Hyprlang LSP
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = vim.api.nvim_create_augroup("hyprls_atach", { clear = true }),
+  pattern = { "*/hypr/*.conf" },
+  callback = function(event)
+    print(string.format("starting hyprls for %s", vim.inspect(event)))
+    vim.lsp.start {
+      name = "hyprlang",
+      cmd = { "hyprls" },
+      root_dir = vim.fn.getcwd(),
+    }
+  end,
+})

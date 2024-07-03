@@ -1,47 +1,15 @@
 return {
-  {
-    "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
-    config = function()
-      require "configs.conform"
-    end,
-  },
-
-  {
-    "mfussenegger/nvim-lint",
-    config = function()
-      require "configs.lint"
-    end,
-  },
 
   {
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
+    branch = "*",
     lazy = false,
     dependencies = {
-
       {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufRead" },
         cmd = { "LspInfo", "LspInstall", "LspStart" },
-        opts = {
-          mason = {
-            "prettier",
-            "stylua",
-            "biome",
-          },
-          mason_lsp = {
-            auto_install = true,
-            "lua_ls",
-            "ast_grep",
-            "jdtls",
-            "jsonls",
-            "html",
-            "cssls",
-            "emmet_ls",
-            "bashls",
-          },
-        },
+        opts = {},
         config = function(_, opts)
           local setup = require("configs.lspconfig").setup
           setup(_, opts)
@@ -62,34 +30,45 @@ return {
   },
 
   {
+    "stevearc/conform.nvim",
+    event = "BufWritePre", -- uncomment for format on save
+    config = function()
+      require "configs.conform"
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require "configs.lint"
+    end,
+  },
+
+  {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
       library = {
-        -- Library paths can be absolute
-        "~/.config/nvim/",
-        -- Or relative, which means they will be resolved from the plugin dir.
-        "lazy.nvim",
-        "luvit-meta/library",
-        -- It can also be a table with trigger words / mods
-        -- Only load luvit types when the `vim.uv` word is found
+        vim.fn.expand "$VIMRUNTIME/lua",
+        vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
+        vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
+        vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
         { path = "luvit-meta/library", words = { "vim%.uv" } },
-        -- always load the LazyVim library
-        "LazyVim",
-        -- Only load the lazyvim library when the `LazyVim` global is found
-        { path = "LazyVim", words = { "LazyVim" } },
-        -- Load the wezterm types when the `wezterm` module is required
-        -- Needs `justinsgithub/wezterm-types` to be installed
-        { path = "wezterm-types", mods = { "wezterm" } },
       },
-      -- always enable unless `vim.g.lazydev_enabled = false`
-      -- This is the default
-      enabled = function(root_dir)
-        return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
-      end,
-      -- disable when a .luarc.json file is found
-      enabled = function(root_dir)
-        return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+    },
+  },
+  dependencies = {
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+    { -- optional completion source for require statements and module annotations
+      "hrsh7th/nvim-cmp",
+      opts = function(_, opts)
+        opts.sources = opts.sources or {}
+        table.insert(opts.sources, {
+          name = "lazydev",
+          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+        })
       end,
     },
   },
@@ -185,11 +164,6 @@ return {
       "kevinhwang91/nvim-ufo",
       event = "VimEnter",
       init = function()
-        vim.o.foldcolumn = "auto"
-        vim.o.foldlevel = 99 -- Using ufo provider need a large value
-        vim.o.foldlevelstart = 99
-        vim.o.foldnestmax = 0
-        vim.o.foldenable = true
         vim.o.foldmethod = "indent"
 
         vim.opt.fillchars = {
