@@ -70,3 +70,15 @@ lg()
     fi
 }
 
+# list env variables
+list_env() {
+  local var
+  var=$(printenv | cut -d= -f1 | fzf) && echo "$var=${(P)var}"
+}
+
+# list man pages
+list_man() {
+  local manlist manpage
+  manlist=$(man -k . 2>/dev/null | grep "\([1|4]\)" | awk 'BEGIN{FS=OFS="- "} {gsub(/\([[:digit:]]\)/,"",$1); print }' | awk '!seen[$0]++' | fzf) && manpage=$(echo "$manlist" | awk -F' |,' '{print $1}') && man "$manpage"
+}
+

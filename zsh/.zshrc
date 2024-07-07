@@ -95,6 +95,14 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+eval "$(thefuck --alias )"
+eval "$(_AUTO_CPUFREQ_COMPLETE=zsh_source auto-cpufreq)"
+eval $(thefuck --alias)
+
+alias zi="zi"
+
+. /opt/asdf-vm/asdf.sh
+# . ~/.asdf/plugins/java/set-java-home.zsh
 
 source ~/.zsh/user_scripts/funcs.zsh
 source ~/.zsh/user_scripts/aliases.zsh
@@ -149,3 +157,4 @@ function in {
 }
 
 pokemon-colorscripts --no-title -r 1,3,6
+
