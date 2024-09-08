@@ -1,5 +1,6 @@
 return {
   "monkoose/neocodeium",
+  enable = false,
   event = "VeryLazy",
   config = function()
     local neocodeium = require "neocodeium"
