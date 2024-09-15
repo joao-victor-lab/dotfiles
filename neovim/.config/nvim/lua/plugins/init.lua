@@ -7,6 +7,11 @@ return {
   --   end,
   -- },
 
+  {
+    "nvim-tree/nvim-tree.lua",
+    enabled = false,
+  },
+
   { "nvim-telescope/telescope-fzf-native.nvim", enabled = true, build = "make" },
 
   {
@@ -21,13 +26,19 @@ return {
     "nvim-telescope/telescope.nvim",
     opts = { extensions_list = { "themes", "terms", "fzf", "notify" } },
   },
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "markdown",
+        "markdown_inline"
+      },
+    },
+  },
 }
