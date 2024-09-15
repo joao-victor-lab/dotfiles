@@ -44,9 +44,21 @@ return {
               capabilities = nvlsp.capabilities,
             }
           end,
+          lua_ls = lsp_zero.noop,
           jdtls = lsp_zero.noop,
         },
       }
+      -- Hyprlang LSP
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+        pattern = { "*.hl", "hypr*.conf", "*/hypr/**" },
+        callback = function(event)
+          vim.lsp.start {
+            name = "hyprlang",
+            cmd = { "hyprls" },
+            root_dir = vim.fn.getcwd(),
+          }
+        end,
+      })
     end,
   },
 }
