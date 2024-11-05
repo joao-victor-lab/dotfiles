@@ -10,8 +10,15 @@ for i = 1, 9, 1 do
   end)
 end
 
-
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+
+map("n", "<A-t>", function()
+  require("nvchad.themes").open { style = "bordered" }
+end)
+
+map("n", "<C-n>", function()
+  require("yazi").yazi { open_for_directories = true }
+end)
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

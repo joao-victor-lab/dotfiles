@@ -31,3 +31,5 @@
 
 [diff]
     colorMoved = default
+[safe]
+	directory = /tmp/bat-extras
