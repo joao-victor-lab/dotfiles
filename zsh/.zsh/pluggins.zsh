@@ -26,5 +26,6 @@ zinit load atuinsh/atuin
 # zinit snippet OMZP::kubectl
 # zinit snippet OMZP::kubectx
 # zinit snippet OMZP::command-not-found
+zinit snippet OMZP::asdf
 
 zinit cdreplay -q

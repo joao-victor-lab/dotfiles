@@ -36,10 +36,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-if command -v asdf; then
-. /opt/asdf-vm/asdf.sh
-fi
-
 source ~/.zsh/pluggins.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/integrations.zsh
