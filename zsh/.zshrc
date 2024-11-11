@@ -18,9 +18,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
@@ -32,11 +29,14 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+if [[ -z "${SSH_CONNECTION}"]] then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
+
 # Load completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
-zi cdlist &> /dev/null # look at gathered compdefs
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -69,6 +69,9 @@ bindkey '^[w' kill-region
 
 source "/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh"
 
+FPATH+="${FPATH}:${HOME}.local/share/zsh/completions/_docker"
+PATH+="$PATH:$HOME/.cargo/bin"
+
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -83,44 +86,17 @@ eval "$(batman --export-env)"
 eval $(thefuck --alias zsh)
 
 #Shell wrapper for yazi
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-. /opt/asdf-vm/asdf.sh
-
-
-# fzf-man-widget() {
-#   batman="man {1} | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
-#    man -k . | sort \
-#    | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
-#    | fzf  \
-#       -q "$1" \
-#       --ansi \
-#       --tiebreak=begin \
-#       --prompt=' Man > '  \
-#       --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
-#       --preview "${batman}" \
-#       --bind "enter:execute(man {1})" \
-#       --bind "alt-c:+change-preview(cht.sh {1})+change-prompt(ﯽ Cheat > )" \
-#       --bind "alt-m:+change-preview(${batman})+change-prompt( Man > )" \
-#       --bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(ﳁ TLDR > )"
-#   zle reset-prompt
+# function y() {
+# 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+# 	yazi "$@" --cwd-file="$tmp"
+# 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+# 		builtin cd -- "$cwd"
+# 	fi
+# 	rm -f -- "$tmp"
 # }
-#
-# # `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-# bindkey '^h' fzf-man-widget
-# zle -N fzf-man-widget
 
-# yay -S todotxt-git 
-alias td=todo.sh
-autoload _todo todo
+if ! command -v asdf &> /dev/null; then
+  . /opt/asdf-vm/asdf.sh
+fi
 
 pokemon-colorscripts -r --no-title
-
-eval $(thefuck --alias)

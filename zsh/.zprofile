@@ -1,6 +1,6 @@
 HISTSIZE=0 # I use atuin btw
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
+HISTFILE="~/.zsh_history"
+SAVEHIST="$HISTSIZE"
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
@@ -12,6 +12,3 @@ setopt hist_find_no_dups
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-
-# export MANPAGER="sh -c '$batman'"
-# for better MANPAGER use batman script for highligh  https://github.com/eth-p/bat-extras
