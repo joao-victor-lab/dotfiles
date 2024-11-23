@@ -28,15 +28,6 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    --   -- refer to `:h file-pattern` for more examples
-
-    --    "BufReadPre" .. vim.fn.expand "~/Documents/notes/obsidian/the_king/**/*.md",
-    --    "BufNewFile" .. vim.fn.expand "~/Documents/notes/obsidian/the_king/**/*.md",
-    -- },
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
@@ -58,8 +49,39 @@ return {
     event = "VeryLazy",
     config = function()
       local neocodeium = require "neocodeium"
-      neocodeium.setup()
-      vim.keymap.set("i", "<A-f>", neocodeium.accept)
+      local opts = {
+        filetypes = {
+          TelescopePrompt = false,
+          ["dap-repl"] = false,
+        },
+      }
+      neocodeium.setup { opts }
+      vim.keymap.set("i", "<A-i>", neocodeium.accept)
+    end,
+  },
+  {
+    "debugloop/telescope-undo.nvim",
+    dependencies = { -- note how they're inverted to above example
+      {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
+    },
+    opts = {
+      -- don't use `defaults = { }` here, do this in the main telescope spec
+      extensions = {
+        undo = {
+          -- telescope-undo.nvim config, see below
+        },
+        -- no other extensions here, they can have their own spec too
+      },
+    },
+    config = function(_, opts)
+      -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
+      -- configs for us. We won't use data, as everything is in it's own namespace (telescope
+      -- defaults, as well as each extension).
+      require("telescope").setup(opts)
+      require("telescope").load_extension "undo"
     end,
   },
   {

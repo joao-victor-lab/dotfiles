@@ -21,4 +21,8 @@ map("n", "<C-n>", function()
   require("yazi").yazi { open_for_directories = true }
 end)
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map("n", "<leader>eu", function()
+  require("telescope").extensions.undo.undo()
+end, { desc = "Undo files" })
+
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
