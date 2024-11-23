@@ -1,38 +1,43 @@
-if zoxide --version &>/dev/null ; then
-   cd_cmd='z' # eval "$(zoxide init zsh)" in ~/.zshrc
+if ! command -v zoxide --versions &> /dev/null ; then
+   local cd_cmd='z' 
 else
-   cd_cmd='cd'
+   local cd_cmd='cd'
+fi
+
+if ! command -v eza --versions &> /dev/null ; then
+   local ls_cmd=`which eza` 
+else
+   local ls_cmd=`which ls`
 fi
 
 alias v='nvim'
 alias vim='nvim'
-
 alias pn="pnpm"
-alias zi="zi"
 
 alias in='yay -Slq | fzf --multi --preview "yay -Si {1}" | xargs -ro yay -Sy'
 alias dl='yay -Qq | fzf --multi --preview "yay -Qi {1}" | xargs -ro yay -Rns'
 alias up='yay -Syu' # update system/package/aur
 alias pl='yay -Qs | fzf' # list installed package
 alias pc='yay -Sc' # remove unused cache
-alias po='yay -Qtdq | yay -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
+alias po='yay -Qtdq | yay -Rns --print - ' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
 
 
 alias  c='clear' # clear terminal
-alias  l='eza -lh  --icons=auto' # long list
-alias ls='eza -1   --icons=auto' # short list
-alias la='eza -a --icons=auto'
-alias lla='eza -lha --icons=auto'
-alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
-alias ld='eza -lhD --icons=auto' # long list dirs
-alias lt='eza --icons=auto --tree' # list folder as tree
+alias  l='$ls_cmd -lh  --icons=auto' # long list
+alias ls='$ls_cmd -1   --icons=auto' # short list
+alias la='$ls_cmd -a --icons=auto'
+alias lla='$ls_cmd -lha --icons=auto'
+alias ll='$ls_cmd -lha --icons=auto --sort=name --group-directories-first' # long list all
+alias ld='$ls_cmd -lhD --icons=auto' # long list dirs
+alias lt='$ls_cmd --icons=auto --tree' # list folder as tree
 alias cat='bat --color=always'
 
 alias mkdir='mkdir --parents --verbose'
 alias cp='cp --verbose --interactive'
 alias rm='rm --interactive=always --verbose'
-alias rmd='rm --interactive=once --verbose --recursive --force'
+alias rmd='rm --interactive=once --recursive --force'
 
+alias cd="$cd_cmd"
 alias ..='$cd_cmd ..'
 alias ...='$cd_cmd ../..'
 alias .3='$cd_cmd ../../..'
@@ -45,19 +50,23 @@ alias ports='netstat -tulanp'
 alias root='sudo -i'
 alias su='sudo -i'
 
-alias zrel="exec zsh"
+# script: https://github.com/NullSense/fuzzy-sys
+alias service="fuzzy-sys"
+
+# alias zrel="exec zsh"
 
 # fd - cd to selected directory
-cf() {
+fd() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
+  dir=$(bfs ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+  $cd_cmd "$dir"
 }
+
 # fda - including hidden directories
 fda() {
   local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+  dir=$(bfs ${1:-.} -type d 2> /dev/null | fzf +m) && $cd_cmd "$dir"
 }
 
 # cf - fuzzy cd from anywhere
@@ -72,9 +81,9 @@ cf() {
   then
      if [[ -d $file ]]
      then
-        cd -- $file
+        $cd_cmd -- $file
      else
-        cd -- ${file:h}
+        $cd_cmd -- ${file:h}
      fi
   fi
 }
@@ -99,15 +108,19 @@ fo() {
   fi
 }
 
-# fkill - kill process
+# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
 fkill() {
-  local pid
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    local pid 
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi  
 
-  if [ "x$pid" != "x" ]
-  then
-    echo $pid | xargs kill -${1:-9}
-  fi
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi  
 }
 
 # Install one or more versions of specified language
@@ -150,3 +163,11 @@ vmc() {
   fi
 }
 
+# Install packages using yay (change to pacman/AUR helper of your choice)
+function in() {
+    yay -Slq | fzf -q "$1" -m --preview 'yay -Si {1}'| xargs -ro yay -S
+}
+# Remove installed packages (change to pacman/AUR helper of your choice)
+function re() {
+    yay -Qq | fzf -q "$1" -m --preview 'yay -Qi {1}' | xargs -ro yay -Rns
+}
