@@ -55,6 +55,8 @@ alias service="fuzzy-sys"
 
 # alias zrel="exec zsh"
 
+alias docker="podman"
+
 # fd - cd to selected directory
 fd() {
   local dir

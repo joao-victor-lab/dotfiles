@@ -51,16 +51,14 @@ _fzf_compgen_dir() {
     bfs -H "$1" -color -exclude \( -name .git \) -type d 2>/dev/null
 }
 
-[ -f ~/.zshenv ] && . ~/.zshenv
-# [ ~f ~/.zprofile ] && . ~/.zprofile
-
 source /opt/asdf-vm/asdf.sh
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
-[ -f ~/.zsh/integrations.zsh ] || source ~/.zsh/integrations.zsh
-[ -f ~/.zsh/aliases.zsh ] || source ~/.zsh/aliases.zsh
+[ -f ~/.zprofile ] && source ~/.zprofile
+[ -f ~/.zsh/integrations.zsh ] && source ~/.zsh/integrations.zsh
+[ -f ~/.zsh/aliases.zsh ] && source ~/.zsh/aliases.zsh
 
-source ~/.zsh/start_sshAgent.zsh
+[ -f ~/.zsh/start_sshAgent.zsh ] && source ~/.zsh/start_sshAgent.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
