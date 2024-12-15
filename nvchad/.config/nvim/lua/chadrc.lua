@@ -27,7 +27,7 @@ M.base46 = {
 
 M.ui = {
   cmp = {
-    style = "atom",
+    style = "atom_colored",
     format_colors = {
       tailwind = true,
     },

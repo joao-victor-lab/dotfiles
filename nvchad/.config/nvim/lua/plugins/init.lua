@@ -1,31 +1,62 @@
 return {
-  { "tpope/vim-sleuth", lazy = false },
-  -- These are some examples, uncomment them if you want to see them work!
+
+  { "tpope/vim-sleuth", enabled = vim.g.lazy_pluggin_toogle.sleuth, lazy = false },
+
   {
     "neovim/nvim-lspconfig",
+    enabled = vim.g.lazy_pluggin_toogle.lspconfig,
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
       { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+      {
+        "pmizio/typescript-tools.nvim",
+        enabled = vim.g.lazy_pluggin_toogle.typescript_tools,
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
+      },
+      {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+          library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            { path = vim.fn.stdpath "data" .. "lazy/ui/nvchad_types", words = { "nvchad_types" } },
+          },
+        },
+      },
+      {
+        "mfussenegger/nvim-jdtls",
+        lazy = false,
+        cond = function()
+          return vim.fn.executable "java" == 1
+        end,
+        config = function()
+          require "configs.jdtls"
+        end,
+      },
     },
     config = function()
       require "configs.lspconfig"
     end,
   },
-  {
-    "mfussenegger/nvim-jdtls",
-    lazy = false,
-    cond = function()
-      return vim.fn.executable "java" == 1
-    end,
-    config = function()
-      require "configs.jdtls"
+  { -- optional cmp completion source for require statements and module annotations
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
     end,
   },
   {
     "epwalsh/obsidian.nvim",
+    enable = vim.g.lazy_pluggin_toogle.obsidian,
     version = "*", -- recommended, use latest release instead of latest commit
     ft = "markdown",
     dependencies = {
@@ -130,6 +161,7 @@ return {
   },
   {
     "rcarriga/nvim-notify",
+    enabled = vim.g.lazy_pluggin_toogle.notify,
     lazy = false,
     config = function()
       vim.notify = require "notify"
@@ -140,15 +172,17 @@ return {
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        enabled = true,
+        enabled = vim.g.lazy_pluggin_toogle.telescope_fzf_native,
         build = "make",
         cond = function()
           return vim.fn.executable "make" == 1
         end,
       },
+      { "matkrin/telescope-spell-errors.nvim" },
     },
     opts = function()
       pcall(require("telescope").load_extension, "fzf")
+      pcall(require("telescope").load_extension, "spell_errors")
     end,
   },
   {
@@ -165,14 +199,10 @@ return {
       },
     },
   },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  },
-  { "ellisonleao/glow.nvim", enabled = false, config = true, cmd = "Glow" },
+  { "ellisonleao/glow.nvim", enabled = vim.g.lazy_pluggin_toogle.glow, config = true, cmd = "Glow" },
   {
     "folke/zen-mode.nvim",
+    enabled = vim.g.lazy_pluggin_toogle.zen_mode,
     keys = {
       {
         "<leader>tz",
@@ -184,6 +214,12 @@ return {
           }
         end,
         { desc = "toggle zen-mode" },
+      },
+    },
+    dependencies = {
+      {
+        "folke/twilight.nvim",
+        opts = {},
       },
     },
     opts = {
@@ -201,10 +237,6 @@ return {
     },
   },
   -- Lua
-  {
-    "folke/twilight.nvim",
-    opts = {},
-  },
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTelescope", "TodoQuickFix", "TodoLocList" },
@@ -346,6 +378,7 @@ return {
   },
   {
     "epwalsh/obsidian.nvim",
+    enabled = vim.g.lazy_pluggin_toogle.obsidian,
     version = "*",
     ft = "markdown",
     dependencies = {

@@ -1,3 +1,5 @@
+-- I get this confi in lspzero in older version docs
+
 local java_cmds = vim.api.nvim_create_augroup("java_cmds", { clear = true })
 local cache_vars = {}
 

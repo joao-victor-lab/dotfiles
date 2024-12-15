@@ -1,7 +1,10 @@
+-- for fancy icons 
+dofile(vim.g.base46_cache .. "lsp")
+require("nvchad.lsp").diagnostic_config()
 local noop = function() end
 local nvlsp = require "nvchad.configs.lspconfig"
 
-require("nvchad.configs.lspconfig").defaults()
+-- require("nvchad.configs.lspconfig").defaults()
 
 local servers = {
   -- clangd = {},
@@ -13,15 +16,7 @@ local servers = {
 
   ts_ls = {},
 
-  lua_ls = {
-    settings = {
-      Lua = {
-        completion = {
-          callSnippet = "Replace",
-        },
-      },
-    },
-  },
+  lua_ls = {},
 }
 
 local ensure_installed = vim.tbl_keys(servers or {})
@@ -36,12 +31,11 @@ require("mason-lspconfig").setup {
     function(server_name)
       local server = servers[server_name] or {}
 
-      server.init = nvlsp.on_init or {}
+      -- server.init = nvlsp.on_init or {} -- for now enable semantic tokens
       server.on_attach = nvlsp.on_attach or {}
 
       require("lspconfig")[server_name].setup(server)
     end,
-    lua_ls = noop,
     jdtls = noop,
   },
 }

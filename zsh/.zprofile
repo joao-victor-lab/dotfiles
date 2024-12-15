@@ -12,11 +12,12 @@ setopt hist_find_no_dups
 
 # Keybindings
 bindkey -e
+
+# bindkey -x '"\C-r": __atuin_history'
+
 bindkey '^p' atuin-up-search
 bindkey '^n' atuin-up-search
 bindkey '^W' kill-region
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-# for dotfile tool
-# export DOTBARE_DIR="$HOME/.dotfiles"
