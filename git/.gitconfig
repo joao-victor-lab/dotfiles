@@ -16,8 +16,6 @@
 [core]
 	pager = delta
 
-[color]
-	pager = no
 [interactive]
 	diffFilter = delta --color-only
 [delta]
