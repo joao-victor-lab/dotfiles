@@ -5,20 +5,22 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source ~/.zsh/pluggins/init.zsh
+[[ ! -f ~/.zsh/pluggins.zsh ]] || source ~/.zsh/pluggins.zsh 
+[[ ! -f ~/.zprofile ]] || source ~/.zprofile
+[[ ! -f ~/.zsh/integrations.zsh ]] || source ~/.zsh/integrations.zsh
+[[ ! -f ~/.zsh/aliases.zsh ]] || source ~/.zsh/aliases.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # pnpm
+
 export PNPM_HOME="/home/roboarch/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-autoload -Uz compinit 
-compinit
-
-zinit cdreplay -q
 
 [[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
 
@@ -38,8 +40,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-### fzf tips
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --ansi"
 export FZF_CTRL_T_COMMAND="bfs -color -mindepth 1 -exclude \( -name .git \) -printf '%P\n' 2>/dev/null"
 export FZF_ALT_C_COMMAND="bfs -color -mindepth 1 -exclude \( -name .git \) -type d -printf '%P\n' 2>/dev/null"
 
@@ -51,18 +51,6 @@ _fzf_compgen_dir() {
     bfs -H "$1" -color -exclude \( -name .git \) -type d 2>/dev/null
 }
 
-source /opt/asdf-vm/asdf.sh
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# enable-fzf-tab
 
-[ -f ~/.zprofile ] && source ~/.zprofile
-[ -f ~/.zsh/integrations.zsh ] && source ~/.zsh/integrations.zsh
-[ -f ~/.zsh/aliases.zsh ] && source ~/.zsh/aliases.zsh
-
-[ -f ~/.zsh/start_sshAgent.zsh ] && source ~/.zsh/start_sshAgent.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-enable-fzf-tab
-
-pokemon-colorscripts -r --no-title
+pokego --no-title -r 1,3,6

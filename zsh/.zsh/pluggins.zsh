@@ -46,7 +46,7 @@ zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
 # zinit snippet OMZP::kubectl
 # zinit snippet OMZP::kubectx
 # zinit snippet OMZP::command-not-found
-zinit snippet OMZP::asdf
+# zinit snippet OMZP::asdf
 
 zinit creinstall ~/.local/share/zsh/completions/ >> /dev/null
 
