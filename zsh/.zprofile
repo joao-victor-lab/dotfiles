@@ -11,7 +11,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Keybindings
-bindkey -e
+bindkey -v
 
 # bindkey -x '"\C-r": __atuin_history'
 
@@ -22,3 +22,5 @@ bindkey '^W' kill-region
 export EDITOR="nvim"
 export VISUAL="nvim"
 export MANPAGER="nvim +Man!"
+
+export TODO_DIR=/data/robot/nots/BigBrain/06_Daily/tasks/

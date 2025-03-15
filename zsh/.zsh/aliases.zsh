@@ -14,12 +14,10 @@ alias v='nvim'
 alias vim='nvim'
 alias pn="pnpm"
 
-alias in='yay -Slq | fzf --multi --preview "yay -Si {1}" | xargs -ro yay -Sy'
-alias dl='yay -Qq | fzf --multi --preview "yay -Qi {1}" | xargs -ro yay -Rns'
 alias up='yay -Syu' # update system/package/aur
 alias pl='yay -Qs | fzf' # list installed package
 alias pc='yay -Sc' # remove unused cache
-alias po='yay -Qtdq | yay -Rns --print - ' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
+alias po='$aurhelper -Qqd | $aurhelper -Rsu --print -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
 
 
 alias  c='clear' # clear terminal
@@ -31,12 +29,14 @@ alias ll='$ls_cmd -lha --icons=auto --sort=name --group-directories-first' # lon
 alias ld='$ls_cmd -lhD --icons=auto' # long list dirs
 alias lt='$ls_cmd --icons=auto --tree' # list folder as tree
 alias cat='bat --color=always'
+# alias t='task
 
 alias mkdir='mkdir --parents --verbose'
 alias cp='cp --verbose --interactive'
 alias rm='rm --interactive=always --verbose'
-alias rmd='rm --interactive=once --recursive --force'
+alias rr='trash'
 
+alias zi='__zoxide_zi'
 alias cd="$cd_cmd"
 alias ..='$cd_cmd ..'
 alias ...='$cd_cmd ../..'
@@ -51,11 +51,13 @@ alias root='sudo -i'
 alias su='sudo -i'
 
 # script: https://github.com/NullSense/fuzzy-sys
-alias service="fuzzy-sys"
+alias sv="fuzzy-sys"
 
 # alias zrel="exec zsh"
 
 alias docker="podman"
+# ShortCut for scrcpy
+alias phone="scrcpy -S -K --no-audio &"
 
 # fd - cd to selected directory
 fd() {
