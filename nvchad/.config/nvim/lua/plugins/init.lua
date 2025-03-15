@@ -67,7 +67,7 @@ return {
       workspaces = {
         {
           name = "personal",
-          path = "~/Documents/notes/obsidian/the_king/",
+          path = "~/data/nots/BigBrain/",
         },
       },
       ui = { enable = false },
@@ -390,7 +390,7 @@ return {
       workspaces = {
         {
           name = "personal",
-          path = "~/Documents/notes/roboNots/",
+          path = "/data/robot/nots/BigBrain/",
         },
       },
       templates = {},
