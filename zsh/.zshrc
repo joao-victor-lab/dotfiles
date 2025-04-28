@@ -19,7 +19,6 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Load Personal Stuff
-#source ~/.zprofile
 [[ -f ~/.zshenv ]] && source ~/.zshenv
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zprofile ]] && source ~/.zprofile
@@ -43,6 +42,8 @@ zinit snippet OMZL::git.zsh
 #zinit snippet OMZP::kubectl
 #zinit snippet OMZP::kubectx
 #zinit snippet OMZP::command-not-found
+
+zinit load thirteen37/fzf-alias
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -75,8 +76,8 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza $realpath'
 
 # Aliases
 alias ls='ls --color'
@@ -88,6 +89,15 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 
+export ASDF_CONFIG_FILE="${HOME}/.config/asdf/config"
 export ASDF_DATA_DIR="$HOME/.local/share/asdf"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf $fpath)
+
+# pnpm
+export PNPM_HOME="/home/robot/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

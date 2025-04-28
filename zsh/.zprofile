@@ -23,4 +23,4 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export MANPAGER="nvim +Man!"
 
-export TODO_DIR=/data/robot/nots/BigBrain/06_Daily/tasks/
+#export TODO_DIR="/home/robot/Documents/var/"
