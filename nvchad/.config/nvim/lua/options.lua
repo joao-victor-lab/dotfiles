@@ -1,10 +1,6 @@
 require "nvchad.options"
 
-local o = vim.o
-local opt = vim.opt
-o.cursorlineopt = "both" -- to enable cursorline!
-opt.termguicolors = true
-opt.spelllang = "pt_br"
-opt.undofile = true
+-- add yours here!
 
-o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+local o = vim.o
+o.cursorlineopt ='both' -- to enable cursorline!

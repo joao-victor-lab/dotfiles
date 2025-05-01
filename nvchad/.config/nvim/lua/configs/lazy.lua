@@ -11,10 +11,6 @@ return {
     },
   },
 
-  change_detection = {
-    notify = false,
-  },
-
   performance = {
     rtp = {
       disabled_plugins = {
@@ -29,22 +25,22 @@ return {
         "netrwSettings",
         "netrwFileHandlers",
         "matchit",
-        -- "tar",
-        -- "tarPlugin",
-        -- "rrhelper",
-        -- "spellfile_plugin",
-        -- "vimball",
-        -- "vimballPlugin",
-        -- "zip",
-        -- "zipPlugin",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
         "tutor",
         "rplugin",
         "syntax",
         "synmenu",
         "optwin",
-        -- "compiler",
+        "compiler",
         "bugreport",
-        -- "ftplugin",
+        "ftplugin",
       },
     },
   },
