@@ -19,9 +19,9 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Load Personal Stuff
-[[ -f ~/.zshenv ]] && source ~/.zshenv
-[[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
-[[ -f ~/.zprofile ]] && source ~/.zprofile
+bindkey -v
+
+. ~/.zsh/aliases.zsh
 
 
 # Add in Powerlevel10k
@@ -45,59 +45,83 @@ zinit snippet OMZL::git.zsh
 
 zinit load thirteen37/fzf-alias
 
-# Load completions
-autoload -Uz compinit && compinit
-
-zinit cdreplay -q
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
-
-# History
-HISTSIZE=1
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
 # Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+#
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle -d ':completion:*' format
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza $realpath'
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+# for zoxide completion
+zstyle ':fzf-tab:complete:__zoxide_cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# git completion
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 
-# Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
+# no prview for options
+  zstyle ':fzf-tab:complete:*:options' fzf-preview ''
+  # preview for files
+  zstyle ":fzf-tab:complete:*:argument-rest" fzf-preview '
+    if [[ -d "$realpath" ]]; then
+      tree -C -L 3 "$realpath"
+    elif [[ -f "$realpath" ]]; then
+      if $(grep -qI . "$realpath"); then
+        bat -p --color=always "$realpath"
+      else
+        echo "Realpath: $realpath"
+        # Use gstat for Linux; fallback to stat for macOS or BSD
+        local stat_cmd
+        local -a stat_opts
+        local arch=$(uname -s)
+        if [[ $OSTYPE = darwin* ]]; then
+          # Darwin / FreeBSD version
+          local gprefix
+          command -v gstat &>/dev/null && gprefix=g
+          echo "Yes"
+          if [[ -z $gprefix ]]; then
+              stat_cmd="stat"
+              stat_opts=(
+              "-f"
+              "File: %N\nLocation: %d:%i\nMode: %Sp (%Mp%Lp)\nLinks: %l\nOwner: %Su/%Sg\nSize: %z (%b blocks)\nChanged: %Sc\nModified: %Sm\nAccessed: %Sa"
+              )
+          fi
+        else
+          # Linux or Darwin with GNU support
+          stat_cmd="${gprefix}stat"
+          stat_opts=(
+            "-c"
+            "File: %N\nType: %F\nLocation: %d:%i\nMode: %A (%a)\nLinks: %h\nOwner: %U/%G\nSize: %s (%b blocks)\nChanged: %z\nModified: %y\nAccessed: %x"
+          )
+        fi
+
+        echo $($stat_cmd "$stat_opts[@]" "$realpath")
+      fi
+    fi'
+
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 
-export ASDF_CONFIG_FILE="${HOME}/.config/asdf/config"
-export ASDF_DATA_DIR="$HOME/.local/share/asdf"
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf $fpath)
+# Load completions
+autoload -Uz compinit && compinit
 
-# pnpm
-export PNPM_HOME="/home/robot/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+zinit cdreplay -q

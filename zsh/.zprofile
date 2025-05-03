@@ -11,16 +11,29 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Keybindings
-bindkey -v
 
 # bindkey -x '"\C-r": __atuin_history'
 
 bindkey '^p' atuin-up-search
 bindkey '^n' atuin-up-search
-bindkey '^W' kill-region
+bindkey '^[w' kill-region
 
 export EDITOR="nvim"
 export VISUAL="nvim"
 export MANPAGER="nvim +Man!"
+#export TODO_DIR="/home/robot/Documents/var/tasks"
 
-#export TODO_DIR="/home/robot/Documents/var/"
+export ASDF_CONFIG_FILE="${HOME}/.config/asdf/config"
+export ASDF_DATA_DIR="$HOME/.local/share/asdf"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf $fpath)
+
+# pnpm
+export PNPM_HOME="/home/robot/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+

@@ -1,15 +1,3 @@
-if ! command -v zoxide --versions &> /dev/null ; then
-   local cd_cmd='z' 
-else
-   local cd_cmd='cd'
-fi
-
-if ! command -v eza --versions &> /dev/null ; then
-   local ls_cmd=`which eza` 
-else
-   local ls_cmd=`which ls`
-fi
-
 alias v='nvim'
 alias vim='nvim'
 alias pn="pnpm"
@@ -21,13 +9,13 @@ alias po='$aurhelper -Qqd | $aurhelper -Rsu --print -' # remove unused packages,
 
 
 alias  c='clear' # clear terminal
-alias  l='$ls_cmd -lh  --icons=auto' # long list
-alias ls='$ls_cmd -1   --icons=auto' # short list
-alias la='$ls_cmd -a --icons=auto'
-alias lla='$ls_cmd -lha --icons=auto'
-alias ll='$ls_cmd -lha --icons=auto --sort=name --group-directories-first' # long list all
-alias ld='$ls_cmd -lhD --icons=auto' # long list dirs
-alias lt='$ls_cmd --icons=auto --tree' # list folder as tree
+alias  l='eza -lh  --icons=auto' # long list
+alias ls='eza -1   --icons=auto' # short list
+alias la='eza -a --icons=auto'
+alias lla='eza -lha --icons=auto'
+alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
+alias ld='eza -lhD --icons=auto' # long list dirs
+alias lt='eza --icons=auto --tree' # list folder as tree
 alias cat='bat --color=always'
 # alias t='task
 
@@ -37,12 +25,12 @@ alias rm='rm --interactive=always --verbose'
 alias rr='trash'
 
 alias zi='__zoxide_zi'
-alias cd="$cd_cmd"
-alias ..='$cd_cmd ..'
-alias ...='$cd_cmd ../..'
-alias .3='$cd_cmd ../../..'
-alias .4='$cd_cmd ../../../..'
-alias .5='$cd_cmd ../../../../..'
+#alias cd="z"
+alias ..='z ..'
+alias ...='z ../..'
+alias .3='z ../../..'
+alias .4='z ../../../..'
+alias .5='z ../../../../..'
 alias path='echo -e ${PATH//:/\\n}'
 
 alias ports='netstat -tulanp'
@@ -64,13 +52,13 @@ fd() {
   local dir
   dir=$(bfs ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
-  $cd_cmd "$dir"
+  cd "$dir"
 }
 
 # fda - including hidden directories
 fda() {
   local dir
-  dir=$(bfs ${1:-.} -type d 2> /dev/null | fzf +m) && $cd_cmd "$dir"
+  dir=$(bfs ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
 # cf - fuzzy cd from anywhere
@@ -85,9 +73,9 @@ cf() {
   then
      if [[ -d $file ]]
      then
-        $cd_cmd -- $file
+        cd -- $file
      else
-        $cd_cmd -- ${file:h}
+        cd -- ${file:h}
      fi
   fi
 }
